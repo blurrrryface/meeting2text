@@ -92,7 +92,7 @@ with st.sidebar:
                 model="deepseek-chat",
                 messages=[
                     {"role": "system",
-                     "content": "下面是一段音频转文本后的内容，你需要根据这段内容回答用户提出来的问题\n====\n" + conversation},
+                     "content": "下面是一段音频转文本后的内容，你需要根据这段内容回答用户提出来的问题,并且最后附上相关点时间点到结尾进行佐证\n====\n" + conversation},
                     {"role": "user", "content": question},
                 ],
                 temperature=0.3,
@@ -101,7 +101,7 @@ with st.sidebar:
 
             background = response.choices[0].message.content
             st.write("对话结果：")
-            st.write(background)
+            st.markdown(background)
         else:
             st.error("请先解析音频文件！")
 
@@ -117,17 +117,16 @@ if st.session_state.audio_df is not None and len(st.session_state.audio_df) > 0:
     # 显示解析结果
     st.subheader("解析结果")
     for index, row in st.session_state.audio_df.iterrows():
-        st.audio(row['文件路径'], format='audio/wav')
-
         start_time = row['开始时间']
         end_time = row['结束时间']
         start_time_str = format_time(start_time)
-        end_time_str = format_time(start_time)
+        end_time_str = format_time(end_time)
 
         speaker = row['说话人']
         speaker_name = st.session_state.speaker_mapping[speaker]
 
-        st.write(f"{start_time_str} ~ {end_time_str} | 说话人 {speaker_name} : {row['音频文本内容']}")
+        st.write(f"##### {start_time_str} ~ {end_time_str} \n 说话人 | **{speaker_name}** : {row['音频文本内容']}")
+        st.audio(row['文件路径'], format='audio/wav')
 else:
     st.info("请先上传并解析文件。")
 
