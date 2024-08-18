@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "meeting2text"
+version = "0.1.0"
+description = ""
+authors = ["blurrrryface <hl852456098@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+modelscope = {extras = ["framework"], version = "^1.17.1"}
+pydub = "^0.25.1"
+streamlit = "^1.37.1"
+funasr = "^1.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
