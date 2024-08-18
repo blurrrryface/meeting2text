@@ -50,7 +50,7 @@ if 'speaker_mapping' not in st.session_state:
     st.session_state.speaker_mapping = {}
 
 # Streamlit 应用
-st.title("音频解析应用")
+st.title("🎙️ 说话人识别 + 🗣️ 语音识别 + 🤖 LLM对话 🚀")
 
 
 def format_time(time):
